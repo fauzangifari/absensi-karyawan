@@ -5,8 +5,10 @@ namespace App\Service;
 use App\Config\Database;
 use App\Domain\Karyawan;
 use App\Exception\ValidationException;
-use App\Model\KaryawanRegisterRequest;
-use App\Model\KaryawanRegisterResponse;
+use App\Model\Login\UserLoginRequest;
+use App\Model\Login\UserLoginResponse;
+use App\Model\Register\KaryawanRegisterRequest;
+use App\Model\Register\KaryawanRegisterResponse;
 use App\Repository\KaryawanRepository;
 
 class KaryawanService
@@ -53,6 +55,30 @@ class KaryawanService
         if($request->username == null || $request->password == null || $request->nama_karyawan == null || $request->alamat_karyawan == null || $request->no_telp_karyawan == null
             || trim($request->username) == '' || trim($request->password) == '' || trim($request->nama_karyawan) == '' || trim($request->alamat_karyawan) == '' || trim($request->no_telp_karyawan) == '') {
             throw new ValidationException("Username, Password, Nama Karyawan, Alamat Karyawan, dan No Telp Karyawan can not blank");
+        }
+    }
+
+    public function login(UserLoginRequest $request): UserLoginResponse
+    {
+        $this->validateUserLoginRequest($request);
+
+        $karyawan = $this->karyawanRepository->findByUsername($request->username);
+        if ($karyawan == null) {
+            throw new ValidationException("Username or Password is incorrect");
+        }
+
+        if (!password_verify($request->password, $karyawan->password)) {
+            throw new ValidationException("Password is incorrect");
+        }
+        $response = new UserLoginResponse();
+        $response->karyawan = $karyawan;
+        return $response;
+    }
+
+    public function validateUserLoginRequest(UserLoginRequest $request): void
+    {
+        if($request->username == null || $request->password == null || trim($request->username) == '' || trim($request->password) == '') {
+            throw new ValidationException("Username and Password can not blank");
         }
     }
 

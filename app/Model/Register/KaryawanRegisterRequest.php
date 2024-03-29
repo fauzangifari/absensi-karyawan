@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Register;
 
 class KaryawanRegisterRequest
 {

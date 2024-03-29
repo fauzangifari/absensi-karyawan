@@ -4,7 +4,9 @@ namespace Service;
 
 use App\Config\Database;
 use App\Domain\Karyawan;
-use App\Model\KaryawanRegisterRequest;
+use App\Exception\ValidationException;
+use App\Model\Login\UserLoginRequest;
+use App\Model\Register\KaryawanRegisterRequest;
 use App\Repository\KaryawanRepository;
 use App\Service\KaryawanService;
 use InvalidArgumentException;
@@ -86,5 +88,55 @@ class KaryawanServiceTest extends TestCase
             self::assertInstanceOf(InvalidArgumentException::class, $exception);
             self::assertEquals("ID Karyawan already exists", $exception->getMessage());
         }
+    }
+
+    public function testLoginNotFound()
+    {
+        $this->expectException(ValidationException::class);
+        $request = new UserLoginRequest();
+        $request->username = "budilahnamanya";
+        $request->password = "password";
+
+        $this->karyawanService->login($request);
+
+    }
+
+    public function testLoginWrongPassword()
+    {
+        $karyawan = new Karyawan();
+        $karyawan->username = "budilahnamanya";
+        $karyawan->password = password_hash("password", PASSWORD_BCRYPT);
+        $karyawan->nama_karyawan = "Budi";
+        $karyawan->alamat_karyawan = "Jl. Juanda 4";
+        $karyawan->no_telp_karyawan = "08123456789";
+        $this->karyawanRepository->saveKaryawan($karyawan);
+
+        $this->expectException(ValidationException::class);
+        $request = new UserLoginRequest();
+        $request->username = "budilahnamanya";
+        $request->password = "passwordsalah";
+
+        $this->karyawanService->login($request);
+    }
+
+    public function testLoginSuccess()
+    {
+        $karyawan = new Karyawan();
+        $karyawan->username = "budilahnamanya";
+        $karyawan->password = password_hash("password", PASSWORD_BCRYPT);
+        $karyawan->nama_karyawan = "Budi";
+        $karyawan->alamat_karyawan = "Jl. Juanda 4";
+        $karyawan->no_telp_karyawan = "08123456789";
+
+        $this->expectException(ValidationException::class);
+
+        $request = new UserLoginRequest();
+        $request->username = "budilahnamanya";
+        $request->password = "password";
+
+        $response = $this->karyawanService->login($request);
+
+        self::assertEquals($karyawan->username, $response->karyawan->username);
+        self::assertTrue(password_verify($karyawan->password, $response->karyawan->password));
     }
 }

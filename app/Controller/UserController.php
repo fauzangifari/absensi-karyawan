@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\App\View;
 use App\Config\Database;
-use App\Model\KaryawanRegisterRequest;
+use App\Exception\ValidationException;
+use App\Model\Login\UserLoginRequest;
+use App\Model\Register\KaryawanRegisterRequest;
 use App\Repository\KaryawanRepository;
 use App\Service\KaryawanService;
 
-class KaryawanController
+class UserController
 {
     private KaryawanService $karyawanService;
 
@@ -51,5 +53,22 @@ class KaryawanController
         View::render('Login/login',[
             'title' => 'Login Karyawan'
         ]);
+    }
+
+    public function postLogin()
+    {
+        $request = new UserLoginRequest();
+        $request->username = $_POST['username'];
+        $request->password = $_POST['password'];
+
+        try {
+            $this->karyawanService->login($request);
+            View::redirect('/dashboard');
+        } catch (ValidationException $e) {
+            View::render('Login/login',[
+                'title' => 'Login Karyawan',
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }

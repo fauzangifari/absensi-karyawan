@@ -8,19 +8,19 @@ namespace App\App {
 
 namespace Controller {
     use App\Config\Database;
-    use App\Controller\KaryawanController;
+    use App\Controller\UserController;
     use App\Domain\Karyawan;
     use App\Repository\KaryawanRepository;
     use PHPUnit\Framework\TestCase;
 
     class KaryawanControllerTest extends TestCase
     {
-        private KaryawanController $karyawanController;
+        private UserController $karyawanController;
         private KaryawanRepository $karyawanRepository;
 
         protected function setUp(): void
         {
-            $this->karyawanController = new KaryawanController();
+            $this->karyawanController = new UserController();
 
             $this->karyawanRepository = new KaryawanRepository(Database::getConnection());
             $this->karyawanRepository->deleteAll();
