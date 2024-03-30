@@ -253,7 +253,7 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Selamat Datang, <?= $model['karyawan']['name'] ?? '' ?></h1>
+                <h1 class="h3 mb-4 text-gray-800">Selamat Datang, <span class="font-weight-bold"><?= $model['karyawan']['name'] ?? '' ?></span></h1>
 
                 <div class="row">
                     <div class="col-xl-12 col-lg-7">
@@ -266,10 +266,30 @@
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                DISINI FORM ABSENSI KEHADIRAN KARYAWAN
+                                <form action="/absensi" method="post">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Nama Karyawan</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?= $model['karyawan']['name'] ?? '' ?>" readonly>
+
+                                        <label for="exampleFormControlInput1">Tanggal</label>
+                                        <input type="date" class="form-control" id="tanggal" name="tanggal" readonly>
+
+                                        <label for="exampleFormControlInput1">Jam Masuk</label>
+                                        <input type="time" class="form-control" id="jam_masuk" name="jam_masuk" readonly>
+
+                                        <label for="exampleFormControlInput1">Jam Keluar</label>
+                                        <input type="time" class="form-control" id="exampleFormControlInput1" name="jam_keluar" required>
+
+                                        <label for="exampleFormControlInput1">Keterangan</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" name="keterangan" required>
+
+                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
             <!-- /.container-fluid -->
@@ -317,3 +337,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+
+    var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+    var formattedDate = currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1 < 10 ? '0' : '') + (currentTime.getMonth() + 1) + '-' + (currentTime.getDate() < 10 ? '0' : '') + currentTime.getDate();
+
+    document.getElementById('jam_masuk').value = formattedTime;
+    document.getElementById('tanggal').value = formattedDate;
+</script>
