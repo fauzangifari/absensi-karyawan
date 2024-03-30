@@ -38,6 +38,13 @@
                                                 Me</label>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <select class="form-control" name="role">
+                                            <option value="">Select Role</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="karyawan">Karyawan</option>
+                                        </select>
+                                    </div>
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
                                         Login
                                     </button>
