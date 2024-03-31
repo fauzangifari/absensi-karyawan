@@ -133,6 +133,13 @@
                                     Absensi Kehadiran Karyawan
                                 </h6>
                             </div>
+
+                            <?php if (isset($model['karyawan']['error'])) { ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $model['karyawan']['error'] ?>
+                                </div>
+                            <?php } ?>
+
                             <!-- Card Body -->
                             <div class="card-body">
                                 <form method="post" action="/dashboard-karyawan">
@@ -144,13 +151,13 @@
                                         <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" value="<?= $model['karyawan']['name'] ?? '' ?>" readonly>
 
                                         <label for="exampleFormControlInput1">Tanggal</label>
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal_absen" readonly>
+                                        <input type="text" class="form-control" id="tanggal" name="tanggal_absen" readonly>
 
                                         <label for="exampleFormControlInput1">Jam Masuk</label>
-                                        <input type="time" class="form-control" id="jam_masuk" name="jam_masuk" readonly>
+                                        <input type="text" class="form-control" id="jam_masuk" name="jam_masuk" readonly>
 
                                         <label for="exampleFormControlInput1">Jam Keluar</label>
-                                        <input type="time" class="form-control" id="jam_keluar" name="jam_keluar" value="16:00:00" readonly>
+                                        <input type="text" class="form-control" id="jam_keluar" name="jam_keluar" value="16:00:00" readonly>
 
                                         <label for="exampleFormControlInput1">Keterangan</label>
                                         <input type="text" class="form-control" id="keterangan" name="keterangan" required>
@@ -240,7 +247,6 @@
 
     var formattedDate = year + '-' + month + '-' + day;
 
-    document.getElementById('jam_keluar').value = formattedTime;
     document.getElementById('jam_masuk').value = formattedTime;
     document.getElementById('tanggal').value = formattedDate;
 </script>

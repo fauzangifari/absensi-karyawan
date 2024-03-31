@@ -69,11 +69,8 @@ class DashboardController
         if ($karyawan == null) {
             View::redirect('/login');
         } else {
-            $timestamp = time();
-
-            $id_absen = "ABS_". $timestamp;
             $request = new AbsenRequest();
-            $request->id_absen = $id_absen;
+            $request->id_absen = 'ABS_' . random_int(1000, 9999) . '_' . date('YmdHis');
             $request->username_karyawan = $_POST['username'];
             $request->nama_karyawan = $_POST['nama_karyawan'];
             $request->tanggal_absen = $_POST['tanggal_absen'];
@@ -83,12 +80,14 @@ class DashboardController
 
             try {
                 $this->absenService->createAbsen($request);
+                View::redirect('/dashboard-karyawan');
             } catch (\Exception $e) {
                 View::render('Dashboard/dashboardKaryawan',[
                     'title' => 'Dashboard Karyawan',
                     'karyawan' => [
                         "name" => $this->sessionService->currentSessionKaryawan()->nama_karyawan,
-                        "error" => $e->getMessage()
+                        "username" => $this->sessionService->currentSessionKaryawan()->username,
+                        "error" => $e->getMessage(),
                     ]
                 ]);
             }
