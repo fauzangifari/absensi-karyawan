@@ -82,6 +82,8 @@ class UserController
                 $response = $this->karyawanService->login($request);
                 $this->sessionService->createSession($response->karyawan->username);
                 View::redirect('/dashboard-karyawan');
+            } else {
+                throw new ValidationException('Role Required');
             }
         } catch (ValidationException $e) {
             View::render('Login/login',[

@@ -9,7 +9,7 @@
             </div>
         <?php } ?>
 
-        <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="col-xl-12 col-lg-12 col-md-9">
 
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" name="role">
-                                            <option value="">Select Role</option>
+                                            <option value="selectrole">Select Role</option>
                                             <option value="admin">Admin</option>
                                             <option value="karyawan">Karyawan</option>
                                         </select>

@@ -11,7 +11,7 @@ use App\Repository\SessionRepository;
 
 class SessionService
 {
-    public static string $COOKIE_NAME = "APP_SESSION";
+    public static string $COOKIE_NAME = "FZN-SESSION";
     private SessionRepository $sessionRepository;
     private KaryawanRepository $karyawanRepository;
     private AdminRepository $adminRepository;
@@ -25,7 +25,7 @@ class SessionService
    public function createSession(string $username): Session
    {
         $session = new Session();
-        $session->id_session = bin2hex(random_bytes(16));
+        $session->id_session = uniqid();
         $session->username = $username;
 
         $this->sessionRepository->saveSesion($session);

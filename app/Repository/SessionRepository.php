@@ -15,7 +15,6 @@ class SessionRepository
 
     public function saveSesion(Session $session): Session
     {
-
         $statement = $this->connection->prepare('INSERT INTO sessions(id_session, username) VALUES(?, ?)');
         $statement->execute([
             $session->id_session,

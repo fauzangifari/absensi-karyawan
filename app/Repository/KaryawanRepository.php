@@ -48,6 +48,14 @@ class KaryawanRepository
         }
     }
 
+    public function countKaryawan(): int
+    {
+        $statement = $this->connection->prepare("SELECT COUNT(*) FROM karyawan");
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        return (int) $result;
+    }
+
     public function deleteAll() : void
     {
         $this->connection->exec("DELETE FROM karyawan");
