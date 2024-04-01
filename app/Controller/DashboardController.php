@@ -37,7 +37,7 @@ class DashboardController
         if ($karyawan == null) {
             View::redirect('/login');
         } else {
-            View::render('Dashboard/dashboardKaryawan',[
+            View::render('Dashboard/dashboardKaryawan', [
                 'title' => 'Dashboard Karyawan',
                 'karyawan' => [
                     "name" => $karyawan->nama_karyawan,
@@ -53,7 +53,7 @@ class DashboardController
         if ($admin == null) {
             View::redirect('/login');
         } else {
-            View::render('Dashboard/dashboardAdmin',[
+            View::render('Dashboard/dashboardAdmin', [
                 'title' => 'Dashboard Admin',
                 'admin' => [
                     "name" => $admin->nama_admin,
@@ -77,12 +77,13 @@ class DashboardController
             $request->jam_masuk = $_POST['jam_masuk'];
             $request->jam_keluar = $_POST['jam_keluar'];
             $request->keterangan = $_POST['keterangan'];
+            $request->alasan = $_POST['alasan'];
 
             try {
                 $this->absenService->createAbsen($request);
                 View::redirect('/dashboard-karyawan');
             } catch (\Exception $e) {
-                View::render('Dashboard/dashboardKaryawan',[
+                View::render('Dashboard/dashboardKaryawan', [
                     'title' => 'Dashboard Karyawan',
                     'karyawan' => [
                         "name" => $this->sessionService->currentSessionKaryawan()->nama_karyawan,

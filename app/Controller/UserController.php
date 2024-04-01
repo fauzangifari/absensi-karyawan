@@ -63,7 +63,7 @@ class UserController
     public function login()
     {
         View::render('Login/login',[
-            'title' => 'Login Karyawan'
+            'title' => 'Login'
         ]);
     }
 

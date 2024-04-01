@@ -122,7 +122,8 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Selamat Datang, <span class="font-weight-bold"><?= $model['karyawan']['name'] ?? '' ?></span></h1>
+                <h1 class="h3 mb-4 text-gray-800">Selamat Datang, <span
+                            class="font-weight-bold"><?= $model['karyawan']['name'] ?? '' ?></span></h1>
 
                 <div class="row">
                     <div class="col-xl-12 col-lg-7">
@@ -144,23 +145,39 @@
                             <div class="card-body">
                                 <form method="post" action="/dashboard-karyawan">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Username Karyawan</label>
-                                        <input type="text" class="form-control" id="username_karyawan" name="username" value="<?= $model['karyawan']['username'] ?? '' ?>" readonly>
+                                        <input type="text" class="form-control" id="username_karyawan" name="username"
+                                               value="<?= $model['karyawan']['username'] ?? '' ?>" readonly
+                                               hidden="hidden">
 
                                         <label for="exampleFormControlInput1">Nama Karyawan</label>
-                                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" value="<?= $model['karyawan']['name'] ?? '' ?>" readonly>
+                                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan"
+                                               value="<?= $model['karyawan']['name'] ?? '' ?>" readonly>
 
                                         <label for="exampleFormControlInput1">Tanggal</label>
-                                        <input type="text" class="form-control" id="tanggal" name="tanggal_absen" readonly>
+                                        <input type="text" class="form-control" id="tanggal" name="tanggal_absen"
+                                               readonly>
 
                                         <label for="exampleFormControlInput1">Jam Masuk</label>
-                                        <input type="text" class="form-control" id="jam_masuk" name="jam_masuk" readonly>
+                                        <input type="text" class="form-control" id="jam_masuk" name="jam_masuk"
+                                               readonly>
 
                                         <label for="exampleFormControlInput1">Jam Keluar</label>
-                                        <input type="text" class="form-control" id="jam_keluar" name="jam_keluar" value="16:00:00" readonly>
+                                        <input type="text" class="form-control" id="jam_keluar" name="jam_keluar"
+                                               value="16:00:00" readonly>
 
                                         <label for="exampleFormControlInput1">Keterangan</label>
-                                        <input type="text" class="form-control" id="keterangan" name="keterangan" required>
+                                        <!--                                        <input type="text" class="form-control" id="keterangan" name="keterangan" required>-->
+                                        <select class="form-control" id="keterangan" name="keterangan" required>
+                                            <option value="Hadir">Hadir</option>
+                                            <option value="Izin">Izin</option>
+                                            <option value="Sakit">Sakit</option>
+                                            <option value="Cuti">Cuti</option>
+                                        </select>
+
+                                        <div id="reasonBox" style="display: none;">
+                                            <label for="exampleFormControlInput1">Alasan</label>
+                                            <input type="text" class="form-control" id="alasan" name="alasan">
+                                        </div>
 
                                         <button type="submit" class="btn btn-primary mt-3">Submit</button>
                                     </div>
@@ -169,84 +186,76 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-xl-12 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">
-                                    Surat Izin Karyawan
-                                </h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-
-                            </div>
-                        </div>
-                    </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
-        </footer>
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/logout">Logout</a>
-            </div>
         </div>
     </div>
-</div>
 
-<script>
-    var currentTime = new Date();
-    var hours = currentTime.getHours();
-    var minutes = currentTime.getMinutes();
-    var seconds = currentTime.getSeconds();
+    <script>
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
 
-    var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 
-    var year = currentTime.getFullYear();
-    var month = (currentTime.getMonth() + 1 < 10 ? '0' : '') + (currentTime.getMonth() + 1);
-    var day = (currentTime.getDate() < 10 ? '0' : '') + currentTime.getDate();
+        var year = currentTime.getFullYear();
+        var month = (currentTime.getMonth() + 1 < 10 ? '0' : '') + (currentTime.getMonth() + 1);
+        var day = (currentTime.getDate() < 10 ? '0' : '') + currentTime.getDate();
 
-    var formattedDate = year + '-' + month + '-' + day;
+        var formattedDate = year + '-' + month + '-' + day;
 
-    document.getElementById('jam_masuk').value = formattedTime;
-    document.getElementById('tanggal').value = formattedDate;
-</script>
+        document.getElementById('jam_masuk').value = formattedTime;
+        document.getElementById('tanggal').value = formattedDate;
+
+        document.getElementById('keterangan').addEventListener('change', function () {
+            var reasonBox = document.getElementById('reasonBox');
+            if (this.value === 'Izin' || this.value === 'Sakit' || this.value === 'Cuti') {
+                reasonBox.style.display = 'block';
+                reasonBox.required = true;
+            } else {
+                reasonBox.style.display = 'none';
+            }
+        });
+    </script>

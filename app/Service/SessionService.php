@@ -25,7 +25,7 @@ class SessionService
    public function createSession(string $username): Session
    {
         $session = new Session();
-        $session->id_session = uniqid();
+        $session->id_session = 'SSN-' . rand(100000, 999999);
         $session->username = $username;
 
         $this->sessionRepository->saveSesion($session);
