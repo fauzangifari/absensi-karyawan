@@ -56,6 +56,31 @@ class KaryawanRepository
         return (int) $result;
     }
 
+    public function showAllKaryawan(): array
+    {
+        $statement = $this->connection->prepare("SELECT username, nama_karyawan, alamat_karyawan, no_telp_karyawan FROM karyawan");
+        $statement->execute();
+
+        $karyawanList = [];
+
+        try {
+            while (($row = $statement->fetch()) !== false) {
+                $karyawan = new Karyawan();
+                $karyawan->username = $row['username'];
+                $karyawan->nama_karyawan = $row['nama_karyawan'];
+                $karyawan->alamat_karyawan = $row['alamat_karyawan'];
+                $karyawan->no_telp_karyawan = $row['no_telp_karyawan'];
+                $karyawanList[] = $karyawan;
+            }
+        } finally {
+            $statement->closeCursor();
+        }
+
+        return $karyawanList;
+    }
+
+
+
     public function deleteAll() : void
     {
         $this->connection->exec("DELETE FROM karyawan");

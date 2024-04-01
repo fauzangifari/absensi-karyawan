@@ -82,4 +82,14 @@ class KaryawanService
         }
     }
 
+    public function showAllKaryawan(): array
+    {
+        return $this->karyawanRepository->showAllKaryawan();
+    }
+
+    public function countKaryawan(): int
+    {
+        return $this->karyawanRepository->countKaryawan();
+    }
+
 }

@@ -10,12 +10,14 @@ use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
 use App\Repository\SessionRepository;
 use App\Service\AbsenService;
+use App\Service\KaryawanService;
 use App\Service\SessionService;
 
 class DashboardController
 {
     private SessionService $sessionService;
     private KaryawanRepository $karyawanRepository;
+    private KaryawanService $karyawanService;
     private AbsenService $absenService;
 
     public function __construct()
@@ -26,9 +28,9 @@ class DashboardController
         $karyawanRepository = new KaryawanRepository($connection);
         $absenRepository = new AbsenRepository($connection);
 
-        $this->karyawanRepository = new KaryawanRepository($connection);
         $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository);
         $this->absenService = new AbsenService($absenRepository);
+        $this->karyawanService = new KaryawanService($karyawanRepository);
     }
 
     public function dashboardKaryawan()
@@ -57,7 +59,8 @@ class DashboardController
                 'title' => 'Dashboard Admin',
                 'admin' => [
                     "name" => $admin->nama_admin,
-                    "count_karyawan" => $this->karyawanRepository->countKaryawan()
+                    "count_karyawan" => $this->karyawanService->countKaryawan(),
+                    "karyawan_list" => $this->karyawanService->showAllKaryawan(),
                 ]
             ]);
         }
@@ -94,6 +97,21 @@ class DashboardController
             }
 
         }
+    }
 
+    public function tableEmployee()
+    {
+        $admin = $this->sessionService->currentSessionAdmin();
+        if ($admin == null) {
+            View::redirect('/login');
+        } else {
+            View::render('Dashboard/tabelKaryawan', [
+                'title' => 'Table Employee',
+                'admin' => [
+                    "name" => $admin->nama_admin,
+                    "karyawan_list" => $this->karyawanService->showAllKaryawan(),
+                ]
+            ]);
+        }
     }
 }
