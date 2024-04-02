@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\App\View;
 use App\Config\Database;
+use App\Domain\Karyawan;
 use App\Exception\ValidationException;
 use App\Model\Absen\AbsenRequest;
+use App\Model\Register\KaryawanRegisterRequest;
 use App\Repository\AbsenRepository;
 use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
@@ -92,12 +94,25 @@ class DashboardController
                         $karyawan->alamat_karyawan = $_POST['updateAddress'];
                         $karyawan->no_telp_karyawan = $_POST['updatePhoneNumber'];
                         $this->karyawanService->updateKaryawan($karyawan);
+                    } elseif ($action === 'create') {
+                        $karyawan = $this->karyawanRepository->findByUsername($_POST['addUsername']);
+                        if ($karyawan != null) {
+                            throw new \Exception("Karyawan with Username " . $_POST['addUsername'] . " already exists");
+                        }
+
+                        $karyawan = new KaryawanRegisterRequest();
+                        $karyawan->username = $_POST['addUsername'];
+                        $karyawan->password = $_POST['addPassword'];
+                        $karyawan->nama_karyawan = $_POST['addName'];
+                        $karyawan->alamat_karyawan = $_POST['addAddress'];
+                        $karyawan->no_telp_karyawan = $_POST['addPhoneNumber'];
+                        $this->karyawanService->register($karyawan);
+                    } else {
+                        throw new \Exception("Invalid action");
                     }
 
                     View::redirect('/dashboard-admin/table');
-                } catch (ValidationException $e) {
-                    echo $e->getMessage();
-                } catch (\Exception $e) {
+                } catch (ValidationException|\Exception $e) {
                     echo $e->getMessage();
                 }
             } else {
