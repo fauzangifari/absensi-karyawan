@@ -79,7 +79,22 @@ class KaryawanRepository
         return $karyawanList;
     }
 
+    public function deleteKaryawan(string $username): void
+    {
+        $statement = $this->connection->prepare("DELETE FROM karyawan WHERE username = ?");
+        $statement->execute([$username]);
+    }
 
+    public function updateKaryawan(Karyawan $karyawan): void
+    {
+        $statement = $this->connection->prepare("UPDATE karyawan SET nama_karyawan = ?, alamat_karyawan = ?, no_telp_karyawan = ? WHERE username = ?");
+        $statement->execute([
+            $karyawan->nama_karyawan,
+            $karyawan->alamat_karyawan,
+            $karyawan->no_telp_karyawan,
+            $karyawan->username
+        ]);
+    }
 
     public function deleteAll() : void
     {

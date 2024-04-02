@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\App\View;
 use App\Config\Database;
+use App\Exception\ValidationException;
 use App\Model\Absen\AbsenRequest;
 use App\Repository\AbsenRepository;
 use App\Repository\AdminRepository;
@@ -28,6 +29,7 @@ class DashboardController
         $karyawanRepository = new KaryawanRepository($connection);
         $absenRepository = new AbsenRepository($connection);
 
+        $this->karyawanRepository = new KaryawanRepository($connection);
         $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository);
         $this->absenService = new AbsenService($absenRepository);
         $this->karyawanService = new KaryawanService($karyawanRepository);
@@ -55,16 +57,55 @@ class DashboardController
         if ($admin == null) {
             View::redirect('/login');
         } else {
+            $karyawan_list = $this->karyawanService->showAllKaryawan();
             View::render('Dashboard/dashboardAdmin', [
                 'title' => 'Dashboard Admin',
                 'admin' => [
                     "name" => $admin->nama_admin,
                     "count_karyawan" => $this->karyawanService->countKaryawan(),
-                    "karyawan_list" => $this->karyawanService->showAllKaryawan(),
+                    "karyawan_list" => $karyawan_list,
                 ]
             ]);
         }
     }
+
+    public function handleEmployeeAction()
+    {
+        $admin = $this->sessionService->currentSessionAdmin();
+        if ($admin == null) {
+            View::redirect('/login');
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+                $action = $_POST['action'];
+                $username = $_POST['username'];
+
+                try {
+                    if ($action === 'delete') {
+                        $this->karyawanService->deleteKaryawan($username);
+                    } elseif ($action === 'update') {
+                        $karyawan = $this->karyawanRepository->findByUsername($username);
+                        if ($karyawan == null) {
+                            throw new \Exception("Karyawan with Username $username not found");
+                        }
+
+                        $karyawan->nama_karyawan = $_POST['updateName'];
+                        $karyawan->alamat_karyawan = $_POST['updateAddress'];
+                        $karyawan->no_telp_karyawan = $_POST['updatePhoneNumber'];
+                        $this->karyawanService->updateKaryawan($karyawan);
+                    }
+
+                    View::redirect('/dashboard-admin/table');
+                } catch (ValidationException $e) {
+                    echo $e->getMessage();
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                View::redirect('/dashboard-admin/table');
+            }
+        }
+    }
+
 
     public function createAttedance()
     {

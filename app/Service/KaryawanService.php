@@ -92,4 +92,17 @@ class KaryawanService
         return $this->karyawanRepository->countKaryawan();
     }
 
+    public function deleteKaryawan(string $username): void
+    {
+        if ($this->karyawanRepository->findByUsername($username) == null) {
+            throw new ValidationException("Karyawan with Username $username not found");
+        } else {
+            $this->karyawanRepository->deleteKaryawan($username);
+        }
+    }
+
+    public function updateKaryawan(Karyawan $karyawan): void
+    {
+        $this->karyawanRepository->updateKaryawan($karyawan);
+    }
 }

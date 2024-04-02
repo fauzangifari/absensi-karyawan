@@ -22,9 +22,9 @@ Router::add('POST', '/login', UserController::class, 'postLogin', [MustNotLoginM
 
 Router::add('GET', '/logout', UserController::class, 'logout', [MustLoginMiddleware::class]);
 
-
 Router::add('GET', '/dashboard-admin', DashboardController::class, 'dashboardAdmin', [MustLoginMiddleware::class]);
 Router::add('GET', '/dashboard-admin/table', DashboardController::class, 'tableEmployee', [MustLoginMiddleware::class]);
+Router::add('POST', '/dashboard-admin/table', DashboardController::class, 'handleEmployeeAction', [MustLoginMiddleware::class]);
 
 Router::add('GET', '/dashboard-karyawan', DashboardController::class, 'dashboardKaryawan', [MustLoginMiddleware::class]);
 Router::add('POST', '/dashboard-karyawan', DashboardController::class, 'createAttedance', [MustLoginMiddleware::class]);
