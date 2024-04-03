@@ -9,9 +9,7 @@ class HomeController
 
     function index()
     {
-        View::render('Home/index', [
-            'title' => 'Absensi Karyawan'
-        ]);
+        View::redirect('/login');
     }
 
 }

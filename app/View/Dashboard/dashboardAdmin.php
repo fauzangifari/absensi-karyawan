@@ -27,11 +27,19 @@
             >
         </li>
 
-        <!-- Nav Item - Tables -->
+        <!-- Nav Item - Employees Table -->
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin/table">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Employees Tables</span></a
+                <span>Employees Table</span></a
+            >
+        </li>
+
+        <!-- Nav Item - Attedance Table -->
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard-admin/attedance">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Attedance Table</span></a
             >
         </li>
 

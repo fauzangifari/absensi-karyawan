@@ -29,5 +29,6 @@ Router::add('POST', '/dashboard-admin/table', DashboardController::class, 'handl
 Router::add('GET', '/dashboard-karyawan', DashboardController::class, 'dashboardKaryawan', [MustLoginMiddleware::class]);
 Router::add('POST', '/dashboard-karyawan', DashboardController::class, 'createAttedance', [MustLoginMiddleware::class]);
 
+Router::add('GET', '/dashboard-admin/attedance', DashboardController::class, 'tableAttendance', [MustLoginMiddleware::class]);
 
 Router::run();

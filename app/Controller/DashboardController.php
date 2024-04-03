@@ -170,4 +170,20 @@ class DashboardController
             ]);
         }
     }
+
+    public function tableAttendance()
+    {
+        $admin = $this->sessionService->currentSessionAdmin();
+        if ($admin == null) {
+            View::redirect('/login');
+        } else {
+            View::render('Dashboard/tabelAbsensi', [
+                'title' => 'Table Attendance',
+                'admin' => [
+                    "name" => $admin->nama_admin,
+                    "absen_list" => $this->absenService->showAllAttedance(),
+                ]
+            ]);
+        }
+    }
 }
