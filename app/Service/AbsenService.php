@@ -56,4 +56,14 @@ class AbsenService
     {
         return $this->absenRepository->showAllAttedance();
     }
+
+    public function showAllAttedanceByDate(string $date): array
+    {
+        return $this->absenRepository->showAllAttedanceByDate($date);
+    }
+
+    public function getAttedanceCountByDate(string $date): int
+    {
+        return $this->absenRepository->getAttedanceCountByDate($date);
+    }
 }

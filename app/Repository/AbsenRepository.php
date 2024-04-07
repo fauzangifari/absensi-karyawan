@@ -81,6 +81,39 @@ class AbsenRepository
         return $result;
     }
 
+    public function showAllAttedanceByDate(string $date): array
+    {
+        $statement = $this->connection->prepare('SELECT username_karyawan, nama_karyawan, tanggal_absen, jam_masuk, jam_keluar, keterangan, alasan FROM absen WHERE tanggal_absen = ?');
+        $statement->execute([$date]);
+
+        $result = [];
+
+        try {
+            while (($row = $statement->fetch()) !== false) {
+                $absen = new Absen();
+                $absen->username_karyawan = $row['username_karyawan'];
+                $absen->nama_karyawan = $row['nama_karyawan'];
+                $absen->tanggal_absen = $row['tanggal_absen'];
+                $absen->jam_masuk = $row['jam_masuk'];
+                $absen->jam_keluar = $row['jam_keluar'];
+                $absen->keterangan = $row['keterangan'];
+                $absen->alasan = $row['alasan'];
+                $result[] = $absen;
+            }
+        } finally {
+            $statement->closeCursor();
+        }
+        return $result;
+    }
+
+    public function getAttedanceCountByDate(string $date): int
+    {
+        $statement = $this->connection->prepare('SELECT COUNT(*) FROM absen WHERE tanggal_absen = ?');
+        $statement->execute([$date]);
+
+        return $statement->fetchColumn();
+    }
+
 
     public function deleteAll(): void
     {

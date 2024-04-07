@@ -67,13 +67,13 @@ class DashboardController
         if ($admin == null) {
             View::redirect('/login');
         } else {
-            $karyawan_list = $this->karyawanService->showAllKaryawan();
             View::render('Dashboard/dashboardAdmin', [
                 'title' => 'Dashboard Admin',
                 'admin' => [
                     "name" => $admin->nama_admin,
                     "count_karyawan" => $this->karyawanService->countKaryawan(),
-                    "karyawan_list" => $karyawan_list,
+                    "count_manajer" => $this->manajerService->countManajer(),
+                    "karyawan_list" => $this->karyawanService->showAllKaryawan(),
                 ]
             ]);
         }
@@ -85,12 +85,13 @@ class DashboardController
         if ($manajer == null) {
             View::redirect('/login');
         } else {
-            $karyawan_list = $this->karyawanService->showAllKaryawan();
             View::render('Dashboard/dashboardManajer', [
                 'title' => 'Dashboard Manajer',
                 'manajer' => [
                     "name" => $manajer->nama_manajer,
-                    "karyawan_list" => $karyawan_list
+                    "karyawan_list" => $this->karyawanService->showAllKaryawan(),
+                    "attendance_list" => $this->absenService->showAllAttedance(),
+                    "attendance_by_date" => $this->absenService->getAttedanceCountByDate(date('Y-m-d')),
                 ]
             ]);
         }
