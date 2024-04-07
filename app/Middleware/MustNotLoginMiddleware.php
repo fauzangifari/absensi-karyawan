@@ -6,6 +6,7 @@ use App\App\View;
 use App\Config\Database;
 use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
+use App\Repository\ManajerRepository;
 use App\Repository\SessionRepository;
 use App\Service\SessionService;
 
@@ -18,7 +19,8 @@ class MustNotLoginMiddleware
         $sessionRepository = new SessionRepository(Database::getConnection());
         $karyawanRepository = new KaryawanRepository(Database::getConnection());
         $adminRepository = new AdminRepository(Database::getConnection());
-        $this->sessionService = new SessionService( $sessionRepository, $karyawanRepository, $adminRepository);
+        $manajerRepository = new ManajerRepository(Database::getConnection());
+        $this->sessionService = new SessionService( $sessionRepository, $karyawanRepository, $adminRepository, $manajerRepository);
     }
 
     public function karyawan(): void
@@ -37,13 +39,25 @@ class MustNotLoginMiddleware
         }
     }
 
+    public function manajer(): void
+    {
+        $manajer = $this->sessionService->currentSessionManajer();
+        if ($manajer != null) {
+            View::redirect('/dashboard-manajer');
+        }
+    }
+
     function before(): void
     {
         if (isset($_GET['role'])) {
             if ($_GET['role'] == 'karyawan') {
                 $this->karyawan();
-            } else {
+            } elseif ($_GET['role'] == 'admin') {
                 $this->admin();
+            } elseif ($_GET['role'] == 'manajer') {
+                $this->manajer();
+            } else {
+                View::redirect('/login');
             }
         }
     }

@@ -27,11 +27,19 @@
             >
         </li>
 
-        <!-- Nav Item - Tables -->
+        <!-- Nav Item - Manager Table -->
         <li class="nav-item">
-            <a class="nav-link" href="/dashboard-admin/table">
+            <a class="nav-link" href="/dashboard-admin/manager">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Employees Tables</span></a
+                <span>Manager</span></a
+            >
+        </li>
+
+        <!-- Nav Item - Employees Table -->
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard-admin/employee">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Employees</span></a
             >
         </li>
 
@@ -39,7 +47,7 @@
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin/attedance">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Attedance Table</span></a
+                <span>Attedance</span></a
             >
         </li>
 

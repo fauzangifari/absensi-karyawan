@@ -2,13 +2,13 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <ul
-            class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-            id="accordionSidebar"
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
     >
         <!-- Sidebar - Brand -->
         <a
-                class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="/dashboard-admin"
+            class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="/dashboard-admin"
         >
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
@@ -67,12 +67,12 @@
         <div id="content">
             <!-- Topbar -->
             <nav
-                    class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+                class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
             >
                 <!-- Sidebar Toggle (Topbar) -->
                 <button
-                        id="sidebarToggleTop"
-                        class="btn btn-link d-md-none rounded-circle mr-3"
+                    id="sidebarToggleTop"
+                    class="btn btn-link d-md-none rounded-circle mr-3"
                 >
                     <i class="fa fa-bars"></i>
                 </button>
@@ -82,29 +82,29 @@
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
                         <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="searchDropdown"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="searchDropdown"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
                         >
                             <i class="fas fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
                         <div
-                                class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown"
+                            class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown"
                         >
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
                                     <input
-                                            type="text"
-                                            class="form-control bg-light border-0 small"
-                                            placeholder="Search for..."
-                                            aria-label="Search"
-                                            aria-describedby="basic-addon2"
+                                        type="text"
+                                        class="form-control bg-light border-0 small"
+                                        placeholder="Search for..."
+                                        aria-label="Search"
+                                        aria-describedby="basic-addon2"
                                     />
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
@@ -121,26 +121,26 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="userDropdown"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="userDropdown"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
                         >
               <span class="mr-2 d-none d-lg-inline text-gray-600 small"
               ><?= $model['admin']['name'] ?? '' ?></span
               >
                             <img
-                                    class="img-profile rounded-circle"
-                                    src="../assets/img/undraw_profile.svg"
+                                class="img-profile rounded-circle"
+                                src="../assets/img/undraw_profile.svg"
                             />
                         </a>
                         <!-- Dropdown - User Information -->
                         <div
-                                class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown"
+                            class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown"
                         >
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -148,13 +148,13 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a
-                                    class="dropdown-item"
-                                    href="#"
-                                    data-toggle="modal"
-                                    data-target="#logoutModal"
+                                class="dropdown-item"
+                                href="#"
+                                data-toggle="modal"
+                                data-target="#logoutModal"
                             >
                                 <i
-                                        class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                                 ></i>
                                 Logout
                             </a>
@@ -168,12 +168,12 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div>
-                    <!-- Table Employee -->
+                    <!-- Table Manager -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                            <h6 class="m-0 font-weight-bold text-primary">Employee Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Manager Table</h6>
                             <button class="btn btn-outline-success ml-auto" data-toggle="modal"
-                                    data-target="#addEmployeeModal"> Add Employee +
+                                    data-target="#addEmployeeModal"> Add Manager +
                             </button>
                         </div>
                         <div class="card-body">
@@ -183,7 +183,7 @@
                                     <thead>
                                     <tr>
                                         <th>Username</th>
-                                        <th>Nama Karyawan</th>
+                                        <th>Nama Manajer</th>
                                         <th>Address</th>
                                         <th>Phone Number</th>
                                         <th>Delete</th>
@@ -191,28 +191,28 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if ($model['admin']['karyawan_list'] !== null): ?>
-                                        <?php foreach ($model['admin']['karyawan_list'] as $karyawan): ?>
+                                    <?php if ($model['admin']['manajer_list'] !== null): ?>
+                                        <?php foreach ($model['admin']['manajer_list'] as $manajer): ?>
                                             <tr>
-                                                <td><?= $karyawan->username ?></td>
-                                                <td><?= $karyawan->nama_karyawan ?></td>
-                                                <td><?= $karyawan->alamat_karyawan ?></td>
-                                                <td><?= $karyawan->no_telp_karyawan ?></td>
+                                                <td><?= $manajer->username ?></td>
+                                                <td><?= $manajer->nama_manajer ?></td>
+                                                <td><?= $manajer->alamat_manajer ?></td>
+                                                <td><?= $manajer->no_telp_manajer ?></td>
                                                 <td>
-                                                    <form method="post" action="/dashboard-admin/employee">
+                                                    <form method="post" action="/dashboard-admin/manager">
                                                         <input type="hidden" name="username"
-                                                               value="<?= $karyawan->username ?>">
+                                                               value="<?= $manajer->username ?>">
                                                         <input type="hidden" name="action" value="delete">
                                                         <button type="submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#updateModal<?= $karyawan->username ?>">
+                                                            data-target="#updateModal<?= $manajer->username ?>">
                                                         Update
                                                     </button>
                                                     <!-- Update Modal -->
-                                                    <div class="modal fade" id="updateModal<?= $karyawan->username ?>"
+                                                    <div class="modal fade" id="updateModal<?= $manajer->username ?>"
                                                          tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
                                                          aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -226,9 +226,9 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="post" action="/dashboard-admin/employee">
+                                                                    <form method="post" action="/dashboard-admin/manager">
                                                                         <input type="hidden" name="username"
-                                                                               value="<?= $karyawan->username ?>">
+                                                                               value="<?= $manajer->username ?>">
                                                                         <input type="hidden" name="action"
                                                                                value="update">
                                                                         <div class="form-group">
@@ -236,14 +236,14 @@
                                                                                 Karyawan</label>
                                                                             <input type="text" class="form-control"
                                                                                    id="updateName" name="updateName"
-                                                                                   value="<?= $karyawan->nama_karyawan ?>">
+                                                                                   value="<?= $manajer->nama_manajer ?>">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="updateAddress">Address</label>
                                                                             <input type="text" class="form-control"
                                                                                    id="updateAddress"
                                                                                    name="updateAddress"
-                                                                                   value="<?= $karyawan->alamat_karyawan ?>">
+                                                                                   value="<?= $manajer->alamat_manajer ?>">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="updatePhoneNumber">Phone
@@ -251,7 +251,7 @@
                                                                             <input type="text" class="form-control"
                                                                                    id="updatePhoneNumber"
                                                                                    name="updatePhoneNumber"
-                                                                                   value="<?= $karyawan->no_telp_karyawan ?>">
+                                                                                   value="<?= $manajer->no_telp_manajer ?>">
                                                                         </div>
                                                                         <button type="submit" class="btn btn-primary">
                                                                             Update
@@ -311,13 +311,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Manager</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="/dashboard-admin/employee">
+                            <form method="post" action="/dashboard-admin/manager">
                                 <input type="hidden" name="action" value="create">
                                 <div class="form-group">
                                     <label for="addUsername">Username</label>
@@ -330,7 +330,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="addName">Nama Karyawan</label>
+                                    <label for="addName">Nama Manajer</label>
                                     <input type="text" class="form-control" id="addName" name="addName" required>
                                 </div>
                                 <div class="form-group">
@@ -342,7 +342,7 @@
                                     <input type="text" class="form-control" id="addPhoneNumber" name="addPhoneNumber"
                                            required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add Employee</button>
+                                <button type="submit" class="btn btn-primary">Add Manager</button>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -355,22 +355,22 @@
 
             <!-- Logout Modal-->
             <div
-                    class="modal fade"
-                    id="logoutModal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
+                class="modal fade"
+                id="logoutModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
             >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                             <button
-                                    class="close"
-                                    type="button"
-                                    data-dismiss="modal"
-                                    aria-label="Close"
+                                class="close"
+                                type="button"
+                                data-dismiss="modal"
+                                aria-label="Close"
                             >
                                 <span aria-hidden="true">×</span>
                             </button>

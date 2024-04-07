@@ -4,9 +4,11 @@ namespace App\Service;
 
 use App\Domain\Admin;
 use App\Domain\Karyawan;
+use App\Domain\Manajer;
 use App\Domain\Session;
 use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
+use App\Repository\ManajerRepository;
 use App\Repository\SessionRepository;
 
 class SessionService
@@ -15,11 +17,13 @@ class SessionService
     private SessionRepository $sessionRepository;
     private KaryawanRepository $karyawanRepository;
     private AdminRepository $adminRepository;
-    public function __construct(SessionRepository $sessionRepository, KaryawanRepository $karyawanRepository, AdminRepository $adminRepository)
+    private ManajerRepository $manajerRepository;
+    public function __construct(SessionRepository $sessionRepository, KaryawanRepository $karyawanRepository, AdminRepository $adminRepository, ManajerRepository $manajerRepository)
     {
         $this->sessionRepository = $sessionRepository;
         $this->karyawanRepository = $karyawanRepository;
         $this->adminRepository = $adminRepository;
+        $this->manajerRepository = $manajerRepository;
     }
 
    public function createSession(string $username): Session
@@ -63,6 +67,18 @@ class SessionService
         }
 
         return $this->adminRepository->findByUsername($session->username);
+   }
+
+   public function currentSessionManajer(): ?Manajer
+   {
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? '';
+
+        $session = $this->sessionRepository->findById($sessionId);
+        if ($session == null) {
+            return null;
+        }
+
+        return $this->manajerRepository->findByUsername($session->username);
    }
 
 }

@@ -9,9 +9,11 @@ use App\Model\Login\UserLoginRequest;
 use App\Model\Register\KaryawanRegisterRequest;
 use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
+use App\Repository\ManajerRepository;
 use App\Repository\SessionRepository;
 use App\Service\AdminService;
 use App\Service\KaryawanService;
+use App\Service\ManajerService;
 use App\Service\SessionService;
 
 class UserController
@@ -19,6 +21,7 @@ class UserController
     private KaryawanService $karyawanService;
     private AdminService $adminService;
     private SessionService $sessionService;
+    private ManajerService $manajerService;
 
     public function __construct()
     {
@@ -29,8 +32,11 @@ class UserController
         $adminRepository = new AdminRepository($connection);
         $this->adminService = new AdminService($adminRepository);
 
+        $manajerRepository = new ManajerRepository($connection);
+        $this->manajerService = new ManajerService($manajerRepository);
+
         $sessionRepository = new SessionRepository($connection);
-        $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository);
+        $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository, $manajerRepository);
     }
 
     public function register()
@@ -82,6 +88,10 @@ class UserController
                 $response = $this->karyawanService->login($request);
                 $this->sessionService->createSession($response->karyawan->username);
                 View::redirect('/dashboard-karyawan');
+            } elseif ($_POST['role'] === 'manajer') {
+                $response = $this->manajerService->login($request);
+                $this->sessionService->createSession($response->manajer->username);
+                View::redirect('/dashboard-manajer');
             } else {
                 throw new ValidationException('Role Required');
             }

@@ -8,12 +8,15 @@ use App\Domain\Karyawan;
 use App\Exception\ValidationException;
 use App\Model\Absen\AbsenRequest;
 use App\Model\Register\KaryawanRegisterRequest;
+use App\Model\Register\ManajerRegisterRequest;
 use App\Repository\AbsenRepository;
 use App\Repository\AdminRepository;
 use App\Repository\KaryawanRepository;
+use App\Repository\ManajerRepository;
 use App\Repository\SessionRepository;
 use App\Service\AbsenService;
 use App\Service\KaryawanService;
+use App\Service\ManajerService;
 use App\Service\SessionService;
 
 class DashboardController
@@ -22,6 +25,8 @@ class DashboardController
     private KaryawanRepository $karyawanRepository;
     private KaryawanService $karyawanService;
     private AbsenService $absenService;
+    private ManajerService $manajerService;
+    private ManajerRepository $manajerRepository;
 
     public function __construct()
     {
@@ -29,12 +34,15 @@ class DashboardController
         $sessionRepository = new SessionRepository($connection);
         $adminRepository = new AdminRepository($connection);
         $karyawanRepository = new KaryawanRepository($connection);
+        $manajerRepository = new ManajerRepository($connection);
         $absenRepository = new AbsenRepository($connection);
 
         $this->karyawanRepository = new KaryawanRepository($connection);
-        $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository);
+        $this->manajerRepository = new ManajerRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $karyawanRepository, $adminRepository, $manajerRepository);
         $this->absenService = new AbsenService($absenRepository);
         $this->karyawanService = new KaryawanService($karyawanRepository);
+        $this->manajerService = new ManajerService($manajerRepository);
     }
 
     public function dashboardKaryawan()
@@ -71,6 +79,23 @@ class DashboardController
         }
     }
 
+    public function dashboardManajer()
+    {
+        $manajer = $this->sessionService->currentSessionManajer();
+        if ($manajer == null) {
+            View::redirect('/login');
+        } else {
+            $karyawan_list = $this->karyawanService->showAllKaryawan();
+            View::render('Dashboard/dashboardManajer', [
+                'title' => 'Dashboard Manajer',
+                'manajer' => [
+                    "name" => $manajer->nama_manajer,
+                    "karyawan_list" => $karyawan_list
+                ]
+            ]);
+        }
+    }
+
     public function handleEmployeeAction()
     {
         $admin = $this->sessionService->currentSessionAdmin();
@@ -79,12 +104,13 @@ class DashboardController
         } else {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $action = $_POST['action'];
-                $username = $_POST['username'];
 
                 try {
                     if ($action === 'delete') {
+                        $username = $_POST['username'];
                         $this->karyawanService->deleteKaryawan($username);
                     } elseif ($action === 'update') {
+                        $username = $_POST['username'];
                         $karyawan = $this->karyawanRepository->findByUsername($username);
                         if ($karyawan == null) {
                             throw new \Exception("Karyawan with Username $username not found");
@@ -111,12 +137,12 @@ class DashboardController
                         throw new \Exception("Invalid action");
                     }
 
-                    View::redirect('/dashboard-admin/table');
+                    View::redirect('/dashboard-admin/employee');
                 } catch (ValidationException|\Exception $e) {
                     echo $e->getMessage();
                 }
             } else {
-                View::redirect('/dashboard-admin/table');
+                View::redirect('/dashboard-admin/employee');
             }
         }
     }
@@ -185,6 +211,73 @@ class DashboardController
                     "absen_list" => $this->absenService->showAllAttedance(),
                 ]
             ]);
+        }
+    }
+
+    public function tableManager()
+    {
+        $admin = $this->sessionService->currentSessionAdmin();
+        if ($admin == null) {
+            View::redirect('/login');
+        } else {
+            View::render('Dashboard/tabelManajer', [
+                'title' => 'Table Manager',
+                'admin' => [
+                    "name" => $admin->nama_admin,
+                    "manajer_list" => $this->manajerService->showAllManajer(),
+                ]
+            ]);
+        }
+    }
+
+    public function handleManagerAction()
+    {
+        $admin = $this->sessionService->currentSessionAdmin();
+        if ($admin == null) {
+            View::redirect('/login');
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+                $action = $_POST['action'];
+
+                try {
+                    if ($action === 'delete') {
+                        $username = $_POST['username'];
+                        $this->manajerService->deleteManajer($username);
+                    } elseif ($action === 'update') {
+                        $username = $_POST['username'];
+                        $manajer = $this->manajerRepository->findByUsername($username);
+                        if ($manajer == null) {
+                            throw new \Exception("Manager with Username $username not found");
+                        }
+
+                        $manajer->nama_manajer = $_POST['updateName'];
+                        $manajer->alamat_manajer = $_POST['updateAddress'];
+                        $manajer->no_telp_manajer = $_POST['updatePhoneNumber'];
+                        $this->manajerService->updateManajer($manajer);
+                    } elseif ($action === 'create') {
+                        $manajer = $this->manajerRepository->findByUsername($_POST['addUsername']);
+                        if ($manajer != null) {
+                            throw new \Exception("Karyawan with Username " . $_POST['addUsername'] . " already exists");
+                        }
+
+                        $manajer = new ManajerRegisterRequest();
+                        $manajer->username = $_POST['addUsername'];
+                        $manajer->password = $_POST['addPassword'];
+                        $manajer->nama_manajer = $_POST['addName'];
+                        $manajer->alamat_manajer = $_POST['addAddress'];
+                        $manajer->no_telp_manajer = $_POST['addPhoneNumber'];
+                        $this->manajerService->register($manajer);
+                    } else {
+                        throw new \Exception("Invalid action");
+                    }
+
+                    View::redirect('/dashboard-admin/manager');
+                } catch (ValidationException|\Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                View::redirect('/dashboard-admin/manager');
+            }
         }
     }
 }
