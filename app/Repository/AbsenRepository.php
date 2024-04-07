@@ -15,7 +15,7 @@ class AbsenRepository
 
     public function saveAbsen(Absen $absen): Absen
     {
-        $statement = $this->connection->prepare('INSERT INTO absen (id_absen, username_karyawan, nama_karyawan, tanggal_absen, jam_masuk, jam_keluar, keterangan, alasan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement = $this->connection->prepare('INSERT INTO absen (id_absen, username_karyawan, nama_karyawan, tanggal_absen, jam_masuk, jam_keluar, keterangan, alasan, file) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->execute([
             $absen->id_absen,
             $absen->username_karyawan,
@@ -24,7 +24,8 @@ class AbsenRepository
             $absen->jam_masuk,
             $absen->jam_keluar,
             $absen->keterangan,
-            $absen->alasan
+            $absen->alasan,
+            $absen->file
         ]);
         return $absen;
     }
@@ -45,6 +46,7 @@ class AbsenRepository
                 $absen->jam_keluar = $row['jam_keluar'];
                 $absen->keterangan = $row['keterangan'];
                 $absen->alasan = $row['alasan'];
+                $absen->file = $row['file'];
                 return $absen;
             } else {
                 return null;

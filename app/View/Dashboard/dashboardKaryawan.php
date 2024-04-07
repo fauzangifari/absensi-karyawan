@@ -162,6 +162,9 @@
                                         <div id="reasonBox" style="display: none;">
                                             <label for="exampleFormControlInput1">Alasan</label>
                                             <input type="text" class="form-control" id="alasan" name="alasan">
+
+                                            <label for="exampleFormControlInput1">File Pendukung</label>
+                                            <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -218,24 +221,24 @@
     </div>
 
     <script>
-        var currentTime = new Date();
-        var hours = currentTime.getHours();
-        var minutes = currentTime.getMinutes();
-        var seconds = currentTime.getSeconds();
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
 
-        var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        const formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 
-        var year = currentTime.getFullYear();
-        var month = (currentTime.getMonth() + 1 < 10 ? '0' : '') + (currentTime.getMonth() + 1);
-        var day = (currentTime.getDate() < 10 ? '0' : '') + currentTime.getDate();
+        const year = currentTime.getFullYear();
+        const month = (currentTime.getMonth() + 1 < 10 ? '0' : '') + (currentTime.getMonth() + 1);
+        const day = (currentTime.getDate() < 10 ? '0' : '') + currentTime.getDate();
 
-        var formattedDate = year + '-' + month + '-' + day;
+        const formattedDate = year + '-' + month + '-' + day;
 
         document.getElementById('jam_masuk').value = formattedTime;
         document.getElementById('tanggal').value = formattedDate;
 
         document.getElementById('keterangan').addEventListener('change', function () {
-            var reasonBox = document.getElementById('reasonBox');
+            const reasonBox = document.getElementById('reasonBox');
             if (this.value === 'Izin' || this.value === 'Sakit' || this.value === 'Cuti') {
                 reasonBox.style.display = 'block';
                 reasonBox.required = true;
@@ -243,4 +246,5 @@
                 reasonBox.style.display = 'none';
             }
         });
+
     </script>

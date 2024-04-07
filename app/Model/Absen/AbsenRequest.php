@@ -12,4 +12,5 @@ class AbsenRequest
     public ?string $jam_keluar = null;
     public ?string $keterangan = null;
     public ?string $alasan = null;
+    public ?string $file = null;
 }

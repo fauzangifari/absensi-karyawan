@@ -12,4 +12,5 @@ class Absen
     public string $jam_keluar;
     public string $keterangan;
     public string $alasan;
+    public string $file;
 }

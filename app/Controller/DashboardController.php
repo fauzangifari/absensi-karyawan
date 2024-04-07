@@ -137,6 +137,7 @@ class DashboardController
             $request->jam_keluar = $_POST['jam_keluar'];
             $request->keterangan = $_POST['keterangan'];
             $request->alasan = $_POST['alasan'];
+            $request->file = $_POST['file'];
 
             try {
                 $this->absenService->createAbsen($request);

@@ -36,6 +36,7 @@ class AbsenService
             $absen->jam_keluar = $request->jam_keluar;
             $absen->keterangan = $request->keterangan;
             $absen->alasan = $request->alasan;
+            $absen->file = $request->file;
 
             $this->absenRepository->saveAbsen($absen);
 
