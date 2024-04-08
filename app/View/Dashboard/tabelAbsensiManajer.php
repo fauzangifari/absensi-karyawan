@@ -114,45 +114,20 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Selamat Datang,
-                    <span class="font-weight-bold"><?= $model['manajer']['name'] ?? '' ?></span>
-                </h1>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Absen Hari Ini
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <?= $model['manajer']['attendance_by_date'] ?? 0 ?> Pegawai
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div>
                     <!-- Table Employee -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Attedance Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Attedance <?php  echo date('Y-m-d'); ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table
-                                        class="table table-bordered"
-                                        id="dataTable"
-                                        width="100%"
-                                        cellspacing="0"
+                                    class="table table-bordered"
+                                    id="dataTable"
+                                    width="100%"
+                                    cellspacing="0"
                                 >
                                     <thead>
                                     <tr>
@@ -165,9 +140,7 @@
                                     </thead>
                                     <tbody>
                                     <?php if ($model['manajer']['attendance_list'] !== null): ?>
-                                        <?php $count = 0; ?>
                                         <?php foreach ($model['manajer']['attendance_list'] as $attedance): ?>
-                                            <?php if ($count < 5): ?>
                                                 <tr>
                                                     <td><?= $attedance->id_absen?></td>
                                                     <td><?= $attedance->nama_karyawan ?></td>
@@ -175,14 +148,10 @@
                                                     <td><?= $attedance->jam_keluar ?></td>
                                                     <td><?= $attedance->keterangan ?></td>
                                                 </tr>
-                                            <?php endif; ?>
-                                            <?php $count++; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-
                                     </tbody>
                                 </table>
-                                <button onclick="window.location.href='/dashboard-manajer/employee'" class="btn btn-primary">View all employee</button>
                             </div>
                         </div>
                     </div>
@@ -190,46 +159,46 @@
 
             </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Fauzan Gifari 2024</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
 
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Fauzan Gifari 2024</span>
                 </div>
             </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/logout">Logout</a>
+            </div>
         </div>
     </div>
+</div>

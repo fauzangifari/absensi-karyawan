@@ -90,7 +90,7 @@ class DashboardController
                 'manajer' => [
                     "name" => $manajer->nama_manajer,
                     "karyawan_list" => $this->karyawanService->showAllKaryawan(),
-                    "attendance_list" => $this->absenService->showAllAttedance(),
+                    "attendance_list" => $this->absenService->showAllAttedanceByDate(date('Y-m-d')),
                     "attendance_by_date" => $this->absenService->getAttedanceCountByDate(date('Y-m-d')),
                 ]
             ]);
@@ -279,6 +279,22 @@ class DashboardController
             } else {
                 View::redirect('/dashboard-admin/manager');
             }
+        }
+    }
+
+    public function tableAttadanceManager()
+    {
+        $manajer = $this->sessionService->currentSessionManajer();
+        if ($manajer == null) {
+            View::redirect('/login');
+        } else {
+            View::render('Dashboard/tabelAbsensiManajer', [
+                'title' => 'Table Attendance Manager',
+                'manajer' => [
+                    "name" => $manajer->nama_manajer,
+                    "attendance_list" => $this->absenService->showAllAttedanceByDate(date('Y-m-d')),
+                ]
+            ]);
         }
     }
 }

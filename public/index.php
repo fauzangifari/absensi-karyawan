@@ -27,12 +27,14 @@ Router::add('GET', '/dashboard-admin/employee', DashboardController::class, 'tab
 Router::add('POST', '/dashboard-admin/employee', DashboardController::class, 'handleEmployeeAction', [MustLoginMiddleware::class]);
 Router::add('GET', '/dashboard-admin/manager', DashboardController::class, 'tableManager', [MustLoginMiddleware::class]);
 router::add('POST', '/dashboard-admin/manager', DashboardController::class, 'handleManagerAction', [MustLoginMiddleware::class]);
+Router::add('GET', '/dashboard-admin/attedance', DashboardController::class, 'tableAttendance', [MustLoginMiddleware::class]);
 
 Router::add('GET', '/dashboard-karyawan', DashboardController::class, 'dashboardKaryawan', [MustLoginMiddleware::class]);
 Router::add('POST', '/dashboard-karyawan', DashboardController::class, 'createAttedance', [MustLoginMiddleware::class]);
 
 Router::add('GET', '/dashboard-manajer', DashboardController::class, 'dashboardManajer', [MustLoginMiddleware::class]);
+Router::add('GET', '/dashboard-manajer/attedance', DashboardController::class, 'tableAttadanceManager', [MustLoginMiddleware::class]);
 
-Router::add('GET', '/dashboard-admin/attedance', DashboardController::class, 'tableAttendance', [MustLoginMiddleware::class]);
+
 
 Router::run();

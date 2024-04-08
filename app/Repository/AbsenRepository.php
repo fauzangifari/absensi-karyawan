@@ -83,7 +83,7 @@ class AbsenRepository
 
     public function showAllAttedanceByDate(string $date): array
     {
-        $statement = $this->connection->prepare('SELECT username_karyawan, nama_karyawan, tanggal_absen, jam_masuk, jam_keluar, keterangan, alasan FROM absen WHERE tanggal_absen = ?');
+        $statement = $this->connection->prepare('SELECT id_absen, username_karyawan, nama_karyawan, tanggal_absen, jam_masuk, jam_keluar, keterangan, alasan FROM absen WHERE tanggal_absen = ?');
         $statement->execute([$date]);
 
         $result = [];
@@ -91,6 +91,7 @@ class AbsenRepository
         try {
             while (($row = $statement->fetch()) !== false) {
                 $absen = new Absen();
+                $absen->id_absen = $row['id_absen'];
                 $absen->username_karyawan = $row['username_karyawan'];
                 $absen->nama_karyawan = $row['nama_karyawan'];
                 $absen->tanggal_absen = $row['tanggal_absen'];
