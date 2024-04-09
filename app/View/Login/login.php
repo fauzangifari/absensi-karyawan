@@ -32,19 +32,19 @@
                                                id="password" placeholder="Password" name="password">
                                     </div>
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                Me</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <select class="form-control" name="role">
+                                        <select class="form-control" name="role" id="role">
                                             <option value="selectrole">Select Role</option>
                                             <option value="admin">Admin</option>
                                             <option value="manajer">Manajer</option>
                                             <option value="karyawan">Karyawan</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Remember
+                                                Me</label>
+                                        </div>
                                     </div>
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
                                         Login
@@ -65,3 +65,43 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('remember') === 'true') {
+            document.getElementById('username').value = localStorage.getItem('username') || '';
+            document.getElementById('role').value = localStorage.getItem('role') || 'selectrole';
+            document.getElementById('customCheck').checked = true;
+        }
+    });
+
+    document.getElementById('customCheck').addEventListener('change', function() {
+        var isChecked = this.checked;
+        var username = document.getElementById('username').value;
+        var role = document.getElementById('role').value;
+
+        if (isChecked) {
+            localStorage.setItem('remember', 'true');
+            localStorage.setItem('username', username);
+            localStorage.setItem('role', role);
+        } else {
+            localStorage.removeItem('remember');
+            localStorage.removeItem('username');
+            localStorage.removeItem('role');
+        }
+    });
+
+    document.getElementById('role').addEventListener('change', function() {
+        if (document.getElementById('customCheck').checked) {
+            localStorage.setItem('role', this.value);
+        }
+    });
+
+    document.getElementById('username').addEventListener('input', function() {
+        if (document.getElementById('customCheck').checked) {
+            localStorage.setItem('username', this.value);
+        }
+    });
+</script>
+
+
