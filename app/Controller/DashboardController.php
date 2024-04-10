@@ -205,15 +205,25 @@ class DashboardController
         if ($admin == null) {
             View::redirect('/login');
         } else {
+            $selectedDate = !empty($_GET['tanggalAbsen']) ? $_GET['tanggalAbsen'] : null;
+
+            if ($selectedDate !== null) {
+                $attendanceByDate = $this->absenService->showAllAttedanceByDate($selectedDate);
+            } else {
+                $attendanceByDate = $this->absenService->showAllAttedance();
+            }
+
             View::render('Dashboard/tabelAbsensi', [
                 'title' => 'Table Attendance',
                 'admin' => [
                     "name" => $admin->nama_admin,
                     "absen_list" => $this->absenService->showAllAttedance(),
+                    "attendance_by_date" => $attendanceByDate,
                 ]
             ]);
         }
     }
+
 
     public function tableManager()
     {

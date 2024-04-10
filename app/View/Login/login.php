@@ -5,7 +5,7 @@
 
         <?php if (isset($model['error'])) { ?>
             <div class="alert alert-danger mt-4" role="alert">
-                <?=$model['error']?>
+                <?= $model['error'] ?>
             </div>
         <?php } ?>
 
@@ -67,7 +67,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         if (localStorage.getItem('remember') === 'true') {
             document.getElementById('username').value = localStorage.getItem('username') || '';
             document.getElementById('role').value = localStorage.getItem('role') || 'selectrole';
@@ -75,7 +75,7 @@
         }
     });
 
-    document.getElementById('customCheck').addEventListener('change', function() {
+    document.getElementById('customCheck').addEventListener('change', function () {
         var isChecked = this.checked;
         var username = document.getElementById('username').value;
         var role = document.getElementById('role').value;
@@ -91,13 +91,13 @@
         }
     });
 
-    document.getElementById('role').addEventListener('change', function() {
+    document.getElementById('role').addEventListener('change', function () {
         if (document.getElementById('customCheck').checked) {
             localStorage.setItem('role', this.value);
         }
     });
 
-    document.getElementById('username').addEventListener('input', function() {
+    document.getElementById('username').addEventListener('input', function () {
         if (document.getElementById('customCheck').checked) {
             localStorage.setItem('username', this.value);
         }

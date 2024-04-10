@@ -1,15 +1,9 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    <ul
-        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-    >
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a
-            class="sidebar-brand d-flex align-items-center justify-content-center"
-            href="/dashboard-admin"
-        >
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard-admin">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -23,32 +17,28 @@
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a
-            >
+                <span>Dashboard</span></a>
         </li>
 
         <!-- Nav Item - Manager Table -->
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin/manager">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Manager</span></a
-            >
+                <span>Manager</span></a>
         </li>
 
         <!-- Nav Item - Employees Table -->
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin/employee">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Employees</span></a
-            >
+                <span>Employees</span></a>
         </li>
 
         <!-- Nav Item - Attedance Table -->
         <li class="nav-item">
             <a class="nav-link" href="/dashboard-admin/attedance">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Attedance</span></a
-            >
+                <span>Attedance</span></a>
         </li>
 
         <!-- Divider -->
@@ -66,14 +56,9 @@
         <!-- Main Content -->
         <div id="content">
             <!-- Topbar -->
-            <nav
-                class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
-            >
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <!-- Sidebar Toggle (Topbar) -->
-                <button
-                    id="sidebarToggleTop"
-                    class="btn btn-link d-md-none rounded-circle mr-3"
-                >
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
 
@@ -81,31 +66,18 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="searchDropdown"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
-                        <div
-                            class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                            aria-labelledby="searchDropdown"
-                        >
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
-                                    <input
-                                        type="text"
-                                        class="form-control bg-light border-0 small"
-                                        placeholder="Search for..."
-                                        aria-label="Search"
-                                        aria-describedby="basic-addon2"
-                                    />
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                           placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2"/>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -120,42 +92,23 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="userDropdown"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-              ><?= $model['admin']['name'] ?? '' ?></span
-              >
-                            <img
-                                class="img-profile rounded-circle"
-                                src="../assets/img/undraw_profile.svg"
-                            />
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                <?= $model['admin']['name'] ?? '' ?>
+              </span>
+                            <img class="img-profile rounded-circle" src="../assets/img/undraw_profile.svg"/>
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div
-                            class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown"
-                        >
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a
-                                class="dropdown-item"
-                                href="#"
-                                data-toggle="modal"
-                                data-target="#logoutModal"
-                            >
-                                <i
-                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
-                                ></i>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
                         </div>
@@ -175,7 +128,13 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-
+                                <form action="/dashboard-admin/attedance" method="GET">
+                                    <div class="form-group">
+                                        <label for="tanggalAbsen">Filter by Date:</label>
+                                        <input type="date" class="form-control" id="tanggalAbsen" name="tanggalAbsen">
+                                        <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                                    </div>
+                                </form>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
@@ -188,82 +147,62 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if ($model['admin']['absen_list'] !== null): ?>
-                                        <?php foreach ($model['admin']['absen_list'] as $absen): ?>
-                                            <tr>
-                                                <td><?= $absen->nama_karyawan ?></td>
-                                                <td><?= $absen->tanggal_absen ?></td>
-                                                <td><?= $absen->jam_masuk ?></td>
-                                                <td><?= $absen->jam_keluar ?></td>
-                                                <td><?= $absen->keterangan ?></td>
-                                                <td><?= $absen->alasan ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                    <?php foreach ($model['admin']['attendance_by_date'] as $attendance): ?>
+                                        <tr>
+                                            <td><?= $attendance->nama_karyawan ?></td>
+                                            <td><?= $attendance->tanggal_absen ?></td>
+                                            <td><?= $attendance->jam_masuk ?></td>
+                                            <td><?= $attendance->jam_keluar ?></td>
+                                            <td><?= $attendance->keterangan ?></td>
+                                            <td><?= $attendance->alasan ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div>
+                <!-- End of Main Content -->
 
-                <div>
-                    <!-- End of Main Content -->
-
-                    <!-- Footer -->
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Fauzan Gifari 2024</span>
-                            </div>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Fauzan Gifari 2024</span>
                         </div>
-                    </footer>
-                    <!-- End of Footer -->
-                </div>
-                <!-- End of Content Wrapper -->
+                    </div>
+                </footer>
+                <!-- End of Footer -->
             </div>
-            <!-- End of Page Wrapper -->
+            <!-- End of Content Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-            <!-- Logout Modal-->
-            <div
-                class="modal fade"
-                id="logoutModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button
-                                class="close"
-                                type="button"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Select "Logout" below if you are ready to end your current session.
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                                Cancel
-                            </button>
-                            <a class="btn btn-primary" href="/logout">Logout</a>
-                        </div>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="/logout">Logout</a>
                     </div>
                 </div>
             </div>
+        </div>
