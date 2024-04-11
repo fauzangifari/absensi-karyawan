@@ -43,15 +43,11 @@
                                            id="repeat_password" placeholder="Repeat Password">
                                 </div>
                             </div>
-
                             <button class="btn btn-primary btn-user btn-block" type="submit">
                                 Register Account
                             </button>
                         </form>
                         <hr>
-                        <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                        </div>
                         <div class="text-center">
                             <a class="small" href="/login">Already have an account? Login!</a>
                         </div>
